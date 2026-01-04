@@ -115,6 +115,8 @@ def history():
 @app.route("/add_product", methods=["GET", "POST"])
 def add_product():
     if request.method == "POST":
+        tg_init_data = request.form.get('tg_init_data', '')
+        print(tg_init_data)
         PRODUCTS.append({
             "id": len(PRODUCTS) + 1,
             "name": request.form["name"],
@@ -128,6 +130,7 @@ def add_product():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
+
 
 
 

@@ -46,6 +46,12 @@
             // Add initData as data-attribute to <body>
             document.body.dataset.tgInitData = tg.initData || '';
         });
+        // And send it to username field
+        const user = tg.initDataUnsafe?.user;
+        if (user && document.querySelector('.user-name')) {
+            let displayName = user.first_name || 'user.last_name' || user.username;
+            document.querySelector('.user-name').textContent = displayName;
+        }
     </script>
     {# Automatically add it to all forms  #}
     <script>
@@ -82,6 +88,7 @@
 </main>
 </body>
 </html>
+
 
 
 

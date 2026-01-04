@@ -6,7 +6,6 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     <script>eruda.init();</script>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
     <meta charset="UTF-8">
     <title>Магазин рослин</title>
@@ -14,11 +13,12 @@
     {# load TG theme values or use previous from csv #}
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        window.Telegram.WebApp.ready();
-        window.Telegram.WebApp.expand();
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
 
-        // Встановлюємо CSS змінні: Telegram якщо є, інакше дефолтні
-        const themeParams = window.Telegram.WebApp.themeParams;
+        // Set CSS theme TG variables, or default if not given (opened in web browser)
+        const themeParams = tg.themeParams;
         const defaults = {
             'bg_color': '#f4f6f4',
             'text_color': '#000000',
@@ -36,12 +36,8 @@
             const value = (tgValue && tgValue !== '#00000000') ? tgValue : defaultValue;
             document.documentElement.style.setProperty(`--tg-${key}`, value);
         });
-    </script>    
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    {# add TG user data #}
-    <script>
+        {# add TG user data #}
         document.addEventListener('DOMContentLoaded', function() {
-            const tg = window.Telegram.WebApp;
             tg.ready();
             // Add initData as data-attribute to <body>
             document.body.dataset.tgInitData = tg.initData || '';
@@ -52,13 +48,8 @@
             let displayName = user.first_name || 'user.last_name' || user.username;
             document.querySelector('.user-name').textContent = displayName;
         }
-    </script>
-    {# Automatically add it to all forms  #}
-    <script>
+        {# Automatically add it to all forms  #}
         document.addEventListener('DOMContentLoaded', function() {
-            const tg = window.Telegram.WebApp;
-            tg.ready();
-
             document.querySelectorAll('form').forEach(form => {
                 let hiddenField = form.querySelector('input[name="tg_init_data"]');
                 if (!hiddenField) {
@@ -71,6 +62,7 @@
             });
         });
     </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <header>
@@ -88,6 +80,7 @@
 </main>
 </body>
 </html>
+
 
 
 

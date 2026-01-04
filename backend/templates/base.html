@@ -47,6 +47,24 @@
             document.body.dataset.tgInitData = tg.initData || '';
         });
     </script>
+    {# Automatically add it to all forms  #}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+
+            document.querySelectorAll('form').forEach(form => {
+                let hiddenField = form.querySelector('input[name="tg_init_data"]');
+                if (!hiddenField) {
+                    hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = 'tg_init_data';
+                    form.appendChild(hiddenField);
+                }
+                hiddenField.value = tg.initData;
+            });
+        });
+    </script>
 </head>
 <body>
 <header>
@@ -64,6 +82,7 @@
 </main>
 </body>
 </html>
+
 
 
 

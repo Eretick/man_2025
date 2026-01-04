@@ -1,0 +1,184 @@
+/* ====== BASE ====== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f4;
+}
+
+header {
+    background: #2e7d32;
+    color: white;
+    padding: 15px 25px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+}
+
+/* ====== SEARCH ====== */
+.search {
+    margin-bottom: 20px;
+}
+
+.search input {
+    padding: 8px;
+    width: 220px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.search button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background: #2e7d32;
+    color: white;
+    cursor: pointer;
+}
+
+/* ====== CATEGORY TABS ====== */
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.categories a {
+    padding: 8px 16px;
+    background: white;
+    border: 2px solid #2e7d32;
+    border-radius: 20px;
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.categories a:hover {
+    background: #2e7d32;
+    color: white;
+}
+
+/* ====== PRODUCT GRID ====== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+/* ====== CARD ====== */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card h3 {
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+.card p {
+    font-size: 13px;
+    color: #555;
+    min-height: 34px;
+}
+
+.card b {
+    display: block;
+    margin: 6px 0;
+    font-size: 15px;
+}
+
+/* ====== BUTTON ====== */
+.btn {
+    display: inline-block;
+    background: #2e7d32;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+.btn:hover {
+    background: #1b5e20;
+}
+
+/* ====== CART ====== */
+.cart-item {
+    background: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.cart-item a {
+    margin-left: auto;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

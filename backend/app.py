@@ -127,5 +127,6 @@ def add_product():
     return render_template("add_product.html")
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=8000)
+
 

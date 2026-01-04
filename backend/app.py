@@ -1,4 +1,3 @@
-import telegram.ext
 from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
@@ -64,7 +63,6 @@ theme = {
 
 @app.route("/")
 def index():
-    print(request.args, request.data)
     category = request.args.get("category")
     query = request.args.get("q", "")
 
@@ -74,9 +72,10 @@ def index():
     if query:
         products = [p for p in products if query.lower() in p["name"].lower()]
 
-    return render_template("index.html", products=products)
+    return render_template("index.html", products=products, user=users[CURRENT_USER_ID])
 
-@app.route("/add_to_cart/<int:pid>")
+@app.route("/add_to_cart/<int:pid>",)
+# @app.route("/add_to_cart/<int:pid>", methods=["POST"])
 def add_to_cart(pid):
     cart = session.get("cart", [])
     cart.append(pid)
@@ -97,9 +96,10 @@ def remove(pid):
     session["cart"] = cart
     return redirect(url_for("cart"))
 
-@app.route("/buy")
+@app.route("/buy", methods=["GET", "POST"])
 def buy():
-    print(request.args, request.data)
+    # telegram data which needs to be parsed and validated to identify the user
+    # tg_init_data = request.form.get('tg_init_data')
     history = session.get("history", [])
     cart_ids = session.get("cart", [])
     for p in PRODUCTS:
@@ -116,8 +116,6 @@ def history():
 @app.route("/add_product", methods=["GET", "POST"])
 def add_product():
     if request.method == "POST":
-        tg_init_data = request.form.get('tg_init_data', '')
-        print(tg_init_data)
         PRODUCTS.append({
             "id": len(PRODUCTS) + 1,
             "name": request.form["name"],
@@ -130,9 +128,4 @@ def add_product():
     return render_template("add_product.html")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
-
-
-
-
-
+    app.run(port=8000)

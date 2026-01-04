@@ -99,6 +99,7 @@ def remove(pid):
 
 @app.route("/buy")
 def buy():
+    print(request.args, request.data)
     history = session.get("history", [])
     cart_ids = session.get("cart", [])
     for p in PRODUCTS:
@@ -130,6 +131,7 @@ def add_product():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
+
 
 
 

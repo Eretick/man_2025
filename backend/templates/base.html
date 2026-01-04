@@ -36,8 +36,17 @@
             const value = (tgValue && tgValue !== '#00000000') ? tgValue : defaultValue;
             document.documentElement.style.setProperty(`--tg-${key}`, value);
         });
-    </script>
+    </script>    
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {# add TG user data #}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            // Add initData as data-attribute to <body>
+            document.body.dataset.tgInitData = tg.initData || '';
+        });
+    </script>
 </head>
 <body>
 <header>
@@ -55,5 +64,6 @@
 </main>
 </body>
 </html>
+
 
 

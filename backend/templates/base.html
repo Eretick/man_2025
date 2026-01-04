@@ -10,6 +10,33 @@
     
     <meta charset="UTF-8">
     <title>Магазин рослин</title>
+
+    {# load TG theme values or use previous from csv #}
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+
+        // Встановлюємо CSS змінні: Telegram якщо є, інакше дефолтні
+        const themeParams = window.Telegram.WebApp.themeParams;
+        const defaults = {
+            'bg_color': '#f4f6f4',
+            'text_color': '#000000',
+            'link_color': '#2e7d32',
+            'button_color': '#2e7d32',
+            'button_text_color': '#ffffff',
+            'header_bg_color': '#2e7d32',
+            'section_bg_color': '#ffffff',
+            'section_header_text_color': '#2e7d32',
+            'subtitle_text_color': '#555555'
+        };
+
+        Object.entries(defaults).forEach(([key, defaultValue]) => {
+            const tgValue = themeParams[key];
+            const value = (tgValue && tgValue !== '#00000000') ? tgValue : defaultValue;
+            document.documentElement.style.setProperty(`--tg-${key}`, value);
+        });
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -28,4 +55,5 @@
 </main>
 </body>
 </html>
+
 
